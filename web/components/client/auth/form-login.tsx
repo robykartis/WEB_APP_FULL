@@ -20,7 +20,7 @@ export default function FormLogin() {
         });
 
         if (result?.error) {
-            console.log(result);
+            console.log(result.error);
             return;
         }
         router.replace("/dashboard");

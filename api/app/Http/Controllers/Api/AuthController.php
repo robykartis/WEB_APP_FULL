@@ -64,10 +64,8 @@ class AuthController extends Controller
                 'status' => 'success',
                 'message' => 'User created successfully',
                 'user' => $user,
-                'authorisation' => [
-                    'token' => $token,
-                    'type' => 'bearer',
-                ]
+                'type' => 'bearer',
+                'accessToken' => $token,
             ]);
         } catch (\Throwable $e) {
             return response()->json([
@@ -96,11 +94,14 @@ class AuthController extends Controller
         $user = Auth::guard('api')->user();
         return response()->json([
             'status' => 'success',
-            'user' => $user,
-            'authorisation' => [
-                'token' => $token,
+            'user' => [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'username' => $user->username,
+                'accessToken' => $token,
                 'type' => 'bearer',
-            ]
+            ],
         ]);
     }
 
